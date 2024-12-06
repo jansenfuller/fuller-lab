@@ -1,17 +1,15 @@
 services:
     prometheus:
-        container_name: prometheus
         image: prom/prometheus
         ports:
             - 4446:9090
         volumes:
             - prometheus-data:/prometheus
-            - /home/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+            - ./prometheus.yml:/etc/prometheus/prometheus.yml
         extra_hosts:
             - "host.docker.internal=host-gateway"
     node_exporter:
         image: quay.io/prometheus/node-exporter:latest
-        container_name: node_exporter
         command:
             - '--path.rootfs=/host'
         ports:

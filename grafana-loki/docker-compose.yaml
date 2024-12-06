@@ -1,19 +1,20 @@
 networks:
   loki:
 
+
 services:
   loki:
     image: grafana/loki:2.9.2
-    container_name: loki
     ports:
       - "4445:3100"
+    volumes:
+      - ./loki.yaml:/etc/loki/loki-config.yaml
     command: -config.file=/etc/loki/local-config.yaml
     networks:
       - loki
 
   promtail:
     image: grafana/promtail:2.9.2
-    container_name: promtail
     volumes:
       - /var/log:/var/log
     command: -config.file=/etc/promtail/config.yml
@@ -21,7 +22,6 @@ services:
       - loki
 
   grafana:
-    container_name: grafana
     environment:
       - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
       - GF_AUTH_ANONYMOUS_ENABLED=true
@@ -38,11 +38,20 @@ services:
           type: loki
           access: proxy 
           orgId: 1
-          url: http://loki:4445
+          url: http://192.168.0.199:4445
+          basicAuth: false
+          isDefault: false
+          version: 1
+          editable: true
+        - name: Prometheus
+          type: prometheus
+          access: proxy
+          orgId: 1
+          url: http://192.168.0.199:4446
           basicAuth: false
           isDefault: true
           version: 1
-          editable: false
+          editable: true
         EOF
         /run.sh
     image: grafana/grafana:latest

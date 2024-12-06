@@ -1,5 +1,5 @@
 services:
-  planka:
+  board:
     image: ghcr.io/plankanban/planka:latest
     restart: on-failure
     volumes:

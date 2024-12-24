@@ -27,7 +27,7 @@
 # documentation.
 
 services:
-  broker:
+  redis:
     image: docker.io/library/redis:7
     restart: unless-stopped
     volumes:
@@ -37,25 +37,34 @@ services:
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     restart: unless-stopped
     depends_on:
-      - db
-      - broker
+      - redis
     ports:
-      - "3334:8000"
+      - "2223:8000"
     volumes:
-      - ./data:/usr/src/paperless/data
-      - ./media:/usr/src/paperless/media
-      - ./export:/usr/src/paperless/export
-      - /mnt/storage/documents:/usr/src/paperless/consume
-    env_file: .env
+      - /mnt/storage/documents/data:/usr/src/paperless/data
+      - /mnt/storage/documents/media:/usr/src/paperless/media
+      - /mnt/storage/documents/export:/usr/src/paperless/export
+      - /mnt/storage/documents/import:/usr/src/paperless/consume
+      - /mnt/storage/documents/trash:/mnt/storage/documents/trash
+    env_file: docker-compose.env
     environment:
-      PAPERLESS_REDIS: redis://broker:6379
+      PAPERLESS_REDIS: redis://redis:6379
       PAPERLESS_DBHOST: 192.168.0.199
       PAPERLESS_DBPORT: 9113
-      PAPERLESS_DBPASS: ${DB_PASS}
+      PAPERLESS_DBNAME: paperless
+      PAPERLESS_DBUSER: ${DB_USERNAME}
+      PAPERLESS_DBPASS: ${DB_PASSWORD}
+      PAPERLESS_CONSUMER_POLLING: 120
+
+      PAPERLESS_CONSUMPTION_DIR: /mnt/storage/documents/import
+      PAPERLESS_MEDIA_ROOT: /mnt/storage/documents/media
+      PAPERLESS_EMPTY_TRASH_DIR: /mnt/storage/documents/trash
+
+      PAPERLESS_ADMIN_USER: admin@paperless.com
+      PAPERLESS_ADMIN_PASSWORD: ${ADMIN_PASSWORD}
 
 
 volumes:
   data:
   media:
   redisdata:
-

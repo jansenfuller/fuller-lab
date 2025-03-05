@@ -1,4 +1,6 @@
 .env
 .vscode
+.DS_Store
+
 docker-compose.env
 **/node_modules/**

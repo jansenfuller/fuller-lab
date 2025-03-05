@@ -1,0 +1,39 @@
+---
+- name: Install and Configure SSH on Debian
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update APT package index
+      apt:
+        update_cache: yes
+
+    - name: Install OpenSSH Server
+      apt:
+        name: openssh-server
+        state: present
+
+    - name: Enable and start SSH service
+      service:
+        name: ssh
+        state: started
+        enabled: yes
+
+    - name: Change SSH port to 1122
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?Port '
+        line: 'Port 1122'
+        state: present
+
+    - name: Allow SSH port 1122 through UFW
+      ufw:
+        rule: allow
+        port: '1122'
+        proto: tcp
+
+    - name: Reload SSH service
+      service:
+        name: ssh
+        state: restarted
+

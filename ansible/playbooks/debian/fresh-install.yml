@@ -1,0 +1,14 @@
+---
+- name: Fresh Debian Install
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Enable autoupdates
+      include_tasks: autoupdate.yml
+
+    - name: Update installation before doing anything
+      include_tasks: apt.yml
+
+    - name: Include SSH installation and configuration tasks
+      include_tasks: ssh.yml

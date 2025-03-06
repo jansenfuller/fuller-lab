@@ -1,0 +1,36 @@
+prometheus.exporter.self "default" {
+}
+
+prometheus.scrape "grafanacloud" {
+  targets    = prometheus.exporter.self.default.targets
+  forward_to = [prometheus.remote_write.grafanacloud.receiver]
+}
+
+prometheus.remote_write "grafanacloud" {
+  endpoint {
+    url = "https://prometheus-prod-36-prod-us-west-0.grafana.net/api/prom/push"
+
+    basic_auth {
+      username = "USERNAME"
+      password = "API_KEY"
+    }
+  }
+}
+
+logging {
+  level = "debug"
+  format = "logfmt"
+  write_to = [loki.write.grafanacloud.receiver]
+}
+
+
+loki.write "grafanacloud" {
+  endpoint {
+    url = "https://logs-prod-021.grafana.net/loki/api/v1/push"
+
+    basic_auth {
+      username = "USERNAME"
+      password = "API_KEY"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+networks:
+  monitoring:
+    driver: bridge
+
+services:
+  alloy:
+    image: alloy/observability:latest
+    environment:
+      - ALLOY_METRICS_PORT=8080      # Metric port, change as necessary
+      - ALLOY_LOGS_PORT=8081         # Log port, change as necessary
+    ports:
+      - "4446:8080"                  # Metrics port for Alloy
+      - "4447:8081"                  # Logs port for Alloy
+    volumes:
+      - ./alloy-config:/etc/alloy    # Mount custom configuration if needed
+    networks:
+      - monitoring
+    restart: unless-stopped

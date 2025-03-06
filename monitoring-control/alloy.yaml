@@ -1,0 +1,24 @@
+metrics:
+  # Scrape metrics from Alloy itself
+  scrape_configs:
+    - job_name: 'local-alloy'
+      static_configs:
+        - targets: ['localhost:4446']  # Alloy's own metrics endpoint
+
+    # Scrape metrics from 10.0.0.1 and 10.0.0.2
+    - job_name: 'network-metrics'
+      static_configs:
+        - targets: ['10.0.0.1:4446', '10.0.0.3:4446']  # Replace with actual metric endpoints
+
+logs:
+  # Scrape logs from Alloy itself
+  scrape_configs:
+    - job_name: 'local-alloy-logs'
+      static_configs:
+        - targets: ['localhost:4447']  # Alloy's log endpoint
+
+    # Scrape logs from 10.0.0.1 and 10.0.0.2
+    - job_name: 'network-logs'
+      static_configs:
+        - targets: ['10.0.0.1:4447', '10.0.0.3:4447']  # Replace with actual log endpoints
+

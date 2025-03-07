@@ -6,6 +6,15 @@ prometheus.scrape "grafanacloud" {
   forward_to = [prometheus.remote_write.grafanacloud.receiver]
 }
 
+prometheus.exporter.unix "local_system" { }
+
+prometheus.scrape "scrape_metrics" {
+  targets         = prometheus.exporter.unix.local_system.targets
+  forward_to      = [prometheus.remote_write.grafanacloud.receiver]
+  scrape_timeout  = "4s"
+  scrape_interval = "5s"
+}
+
 prometheus.remote_write "grafanacloud" {
   endpoint {
     url = "https://prometheus-prod-36-prod-us-west-0.grafana.net/api/prom/push"
@@ -23,6 +32,16 @@ logging {
   write_to = [loki.write.grafanacloud.receiver]
 }
 
+local.file_match "local_files" {
+  path_targets = [{"__path__" = "/var/log/*.log"}]
+  sync_period = "5s"
+}
+
+loki.source.file "log_scrape" {
+  targets    = local.file_match.local_files.targets
+  forward_to = [loki.write.grafanacloud.receiver]
+  tail_from_end = true
+}
 
 loki.write "grafanacloud" {
   endpoint {

@@ -1,21 +1,23 @@
-prometheus.exporter.self "default" {
+prometheus.exporter.unix "default" {
+  include_exporter_metrics = true
+  disable_collectors       = ["mdadm"]
 }
 
-prometheus.scrape "grafanacloud" {
-  targets    = prometheus.exporter.self.default.targets
-  forward_to = [prometheus.remote_write.grafanacloud.receiver]
+prometheus.scrape "default" {
+  // Collect metrics from the default listen address.
+  targets = concat(
+    prometheus.exporter.unix.default.targets,
+    [{
+      // Self-collect metrics
+      job         = "alloy",
+      __address__ = "127.0.0.1:12345",
+    }],
+  )
+
+  forward_to = [prometheus.remote_write.default.receiver]
 }
 
-prometheus.exporter.unix "local_system" { }
-
-prometheus.scrape "scrape_metrics" {
-  targets         = prometheus.exporter.unix.local_system.targets
-  forward_to      = [prometheus.remote_write.grafanacloud.receiver]
-  scrape_timeout  = "4s"
-  scrape_interval = "5s"
-}
-
-prometheus.remote_write "grafanacloud" {
+prometheus.remote_write "default" {
   endpoint {
     url = "https://prometheus-prod-36-prod-us-west-0.grafana.net/api/prom/push"
 
@@ -30,17 +32,6 @@ logging {
   level = "debug"
   format = "logfmt"
   write_to = [loki.write.grafanacloud.receiver]
-}
-
-local.file_match "local_files" {
-  path_targets = [{"__path__" = "/var/log/*.log"}]
-  sync_period = "5s"
-}
-
-loki.source.file "log_scrape" {
-  targets    = local.file_match.local_files.targets
-  forward_to = [loki.write.grafanacloud.receiver]
-  tail_from_end = true
 }
 
 loki.write "grafanacloud" {

@@ -1,0 +1,14 @@
+
+# Lines below here are managed by Salt, do not edit
+RANDOM_DELAY=15
+
+# 4:00 AM: Run Snapraid script
+0 4 * * * /usr/sbin/snapraid/snapraid-aio-script.sh
+
+# 4:05 AM: Run ClamAV scan for infected files
+5 4 * * * clamscan --infected --remove --recursive /home
+
+10 4 * * * crontab -l > /home/jansen/fuller-lab/crontabs
+
+# 4:30 AM: Backup Postgres data
+30 4 * * * /home/jansen/fuller-lab/postgres/backup.sh

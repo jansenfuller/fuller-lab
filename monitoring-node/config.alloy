@@ -1,12 +1,12 @@
-prometheus.exporter.unix "default" {
+prometheus.exporter.unix "metrics" {
   include_exporter_metrics = true
   disable_collectors       = ["mdadm"]
 }
 
-prometheus.scrape "default" {
-  // Collect metrics from the default listen address.
+prometheus.scrape "metrics" {
+  // Collect metrics from the metrics listen address.
   targets = concat(
-    prometheus.exporter.unix.default.targets,
+    prometheus.exporter.unix.metrics.targets,
     [{
       // Self-collect metrics
       job         = "alloy",
@@ -14,10 +14,10 @@ prometheus.scrape "default" {
     }],
   )
 
-  forward_to = [prometheus.remote_write.default.receiver]
+  forward_to = [prometheus.remote_write.metrics.receiver]
 }
 
-prometheus.remote_write "default" {
+prometheus.remote_write "metrics" {
   endpoint {
     url = "https://prometheus-prod-36-prod-us-west-0.grafana.net/api/prom/push"
 

@@ -2,7 +2,7 @@ services:
     pgvecto-17:
         image: tensorchord/pgvecto-rs:pg16-v0.3.0
         ports:
-            - 9113:5432
+            - 9100:5432
         environment:
           POSTGRES_PASSWORD: ${DB_PASSWORD}
           POSTGRES_INITDB_ARGS: '--data-checksums'

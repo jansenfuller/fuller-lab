@@ -2,7 +2,7 @@
 
 cd /mnt/storage/postgres
 
-docker exec -t postgres-pgvecto-16-1 pg_dumpall -c -U postgres > ./dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
+docker exec -t postgres-pgvecto-17-1 pg_dumpall -c -U postgres > ./dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
 
 LOCATION=/mnt/storage/postgres
 FILECOUNT=0

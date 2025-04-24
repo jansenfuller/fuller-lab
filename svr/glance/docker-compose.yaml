@@ -8,5 +8,5 @@ services:
       # Optionally, also mount docker socket if you want to use the docker containers widget
       # - /var/run/docker.sock:/var/run/docker.sock:ro
     ports:
-      - 3334:8080
+      - 3000:8080
     env_file: .env

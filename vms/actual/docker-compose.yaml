@@ -1,5 +1,5 @@
 services:
-  actual_budget:
+  server:
     image: docker.io/actualbudget/actual-server:latest
     ports:
       # This line makes Actual available at port 5006 of the device you run the server on,
@@ -9,6 +9,11 @@ services:
       # Change './actual-data' below to the path to the folder you want Actual to store its data in on your server.
       # '/data' is the path Actual will look for its files in by default, so leave that as-is.
       - ~/budget:/data
+        #environment:
+      #ACTUAL_OPENID_DISCOVERY_URL: https://login.fullerfamily.cc/application/o/actual-budget/
+      #ACTUAL_OPENID_CLIENT_ID: ${CLIENT_ID}
+      #ACTUAL_OPENID_CLIENT_SECRET: ${CLIENT_SECRET}
+      #ACTUAL_OPENID_SERVER_HOSTNAME: https://actual.fullerfamily.cc
     healthcheck:
       # Enable health check for the instance
       test: ['CMD-SHELL', 'node src/scripts/health-check.js']

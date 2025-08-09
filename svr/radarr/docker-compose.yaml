@@ -1,0 +1,14 @@
+services:
+  radarr:
+    container_name: radarr
+    image: lscr.io/linuxserver/radarr:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+    volumes:
+      - /mnt/storage/downloads/movies/config:/config
+      - /mnt/storage/downloads/movies:/data/movies
+    ports:
+      - 2018:7878
+    restart: unless-stopped

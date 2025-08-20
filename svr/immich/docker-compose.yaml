@@ -18,7 +18,13 @@ services:
     #   service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
       # Do not edit the next line. If you want to change the media storage location on your system, edit the value of UPLOAD_LOCATION in the .env file
-      - ${UPLOAD_LOCATION}:/data
+      - ${LIBRARY_LOCATION}:/data/library
+      - ${UPLOAD_LOCATION}:/data/upload
+      - ${THUMBNAIL_LOCATION}:/data/thumbs
+      - ${PROFILE_LOCATION}:/data/profile
+      - ${ENCODED_VIDEO_LOCATION}:/data/encoded-video
+      - ${BACKUP_LOCATION}:/data/backups
+      - /mnt/storage/photos:/mnt/photos
       - /etc/localtime:/etc/localtime:ro
     env_file:
       - .env

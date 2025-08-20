@@ -11,4 +11,4 @@ services:
       - /mnt/storage/downloads/shows:/tv #optional
     ports:
       - 2028:8989
-    restart: unless-stopped
+    restart: always

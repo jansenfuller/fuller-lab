@@ -1,0 +1,12 @@
+services:
+  qbittorrent-exporter:
+    image: ghcr.io/martabal/qbittorrent-exporter:latest
+    container_name: qbittorrent-exporter
+    environment:
+      - QBITTORRENT_BASE_URL=http://10.12.30.2:2006
+      - QBITTORRENT_PASSWORD=${PASSWD}
+      - QBITTORRENT_USERNAME=admin
+      - ENABLE_HIGH_CARDINALITY=true
+    ports:
+      - 9111:8090
+    restart: unless-stopped

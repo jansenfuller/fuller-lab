@@ -7,6 +7,6 @@ services:
           POSTGRES_PASSWORD: ${DB_PASSWORD}
           POSTGRES_INITDB_ARGS: '--data-checksums'
         volumes:
-          - ${DB_DATA_LOCATION}:/var/lib/postgresql/data
+          - $PWD/postgres-data:/var/lib/postgresql/data
           - ./postgres.conf:/etc/postgresql/postgresql.conf
         restart: always

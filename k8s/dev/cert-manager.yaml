@@ -1,0 +1,33 @@
+---
+# 1. ClusterIssuer using Let’s Encrypt ACME (production)
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    # Use the Let’s Encrypt v2 production endpoint
+    server: https://acme-v02.api.letsencrypt.org/directory
+    # Replace with your real email for expiry notices
+    email: jansendfuller@mailfence.com
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+
+---
+# 2. Certificate resource in the budget namespace
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: budget-fullerfamily-cc-cert
+  namespace: budget
+spec:
+  secretName: budget-fullerfamily-cc-tls
+  dnsNames:
+  - budget.fullerfamily.cc
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

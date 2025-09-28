@@ -4,3 +4,6 @@
 
 docker-compose.env
 **/node_modules/**
+
+# Terraform
+.terraform*

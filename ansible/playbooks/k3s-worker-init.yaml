@@ -1,0 +1,33 @@
+---
+- name: Install k3s and join Alpine node to cluster
+  hosts: alpine_nodes
+  become: true
+  vars:
+    k3s_server_url: "https://{{ k3s.host }}:6443"
+    k3s_token: "{{ k3s_token }}"
+
+  tasks:
+    - name: Ensure required packages are installed
+      apk:
+        name:
+          - curl
+          - bash
+        update_cache: yes
+
+    - name: Download k3s install script
+      get_url:
+        url: https://get.k3s.io
+        dest: /tmp/install_k3s.sh
+        mode: '0755'
+
+    - name: Install k3s agent
+      environment:
+        K3S_URL: "{{ k3s_server_url }}"
+        K3S_TOKEN: "{{ k3s_token }}"
+      command: /tmp/install_k3s.sh
+
+    - name: Enable and start k3s-agent service
+      service:
+        name: k3s-agent
+        enabled: yes
+        state: started

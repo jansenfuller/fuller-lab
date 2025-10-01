@@ -1,0 +1,14 @@
+[Unit]
+Description=Exports metrics from mikrotik router
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+User=root
+ExecStart=/root/.local/share/pipx/venvs/mktxp/bin/mktxp export -en Home-Router
+WorkingDirectory=/root/mktxp
+
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Exports metrics from qBittorrent
+After=netowrk.target
+
+[Service]
+Type=simple
+Restart=always
+User=root
+ExecStart=/usr/bin/qbittorrent-exporter/exporter
+WorkingDirectory=/usr/bin/qbittorrent-exporter
+RestartSec=15
+
+[Install]
+WantedBy=multi-user.target

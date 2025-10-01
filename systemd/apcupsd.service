@@ -1,0 +1,14 @@
+[Unit]
+Description=Exports metrics from apcupsd
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+User=root
+ExecStart=/usr/bin/apcupsd-exporter/exporter -apcupsd.addr svr.ff.home:3551 -telemetry.addr :9112
+WorkingDirectory=/usr/bin/apcupsd-exporter/
+
+
+[Install]
+WantedBy=multi-user.target

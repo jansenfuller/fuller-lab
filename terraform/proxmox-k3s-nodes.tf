@@ -16,13 +16,13 @@ resource "proxmox_vm_qemu" "master" {
   disk {
     slot         = "scsi0"
     size         = "24G"
-    storage      = var.vm_storage
+    storage      = "local-lvm"
   }
 
   network {
     id = var.proxmox_node_id
     model  = "virtio"
-    bridge = var.vm_bridge
+    bridge = "vmbr0"
   }
 
   agent     = 1
@@ -42,7 +42,7 @@ resource "proxmox_vm_qemu" "master" {
 # Worker VMs (each 1 core, 2 GB)
 resource "proxmox_vm_qemu" "worker" {
   count       = 2
-  name        = "alpine-k3s-worker-${var.proxmox_node_id}0"
+  name        = "alpine-k3s-worker-${var.proxmox_node_id}${count.index + 1}"
   target_node = "worker-${var.proxmox_node_id}"
 
   clone      = var.template_vm_id
@@ -58,13 +58,13 @@ resource "proxmox_vm_qemu" "worker" {
   disk {
     slot         = "scsi0"
     size         = "16G"
-    storage      = var.vm_storage
+    storage      = "local-lvm"
   }
 
   network {
     id = count.index + 1 + (10 * var.proxmox_node_id)
     model  = "virtio"
-    bridge = var.vm_bridge
+    bridge = "vmbr0"
   }
 
   agent     = 1

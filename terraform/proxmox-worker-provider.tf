@@ -28,21 +28,11 @@ variable "proxmox_password" {
 variable "template_vm_id" {
   description = "Alpine cloud-init template name in Proxmox"
   type        = string
-}
-
-variable "vm_storage" {
-  description = "Storage identifier for VM disk, e.g. local-lvm"
-  type        = string
-  default     = "local-lvm"
-}
-
-variable "vm_bridge" {
-  description = "Network bridge to attach the VMs to, e.g. vmbr0"
-  type        = string
-  default     = "vmbr0"
+  default     = "alpine-3.22.1"
 }
 
 variable "ssh_public_key" {
-  description = "SSH public key to install in the VMs"
+  description = "Ansible SSH public key to install in the VMs"
   type        = string
+  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQNiluz7sw/wxHWwAaJXRwsFG2AUFFIhhphRujjYh5f"
 }

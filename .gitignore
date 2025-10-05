@@ -7,3 +7,4 @@ docker-compose.env
 
 # Terraform
 .terraform*
+*.tfstate

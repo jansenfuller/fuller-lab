@@ -1,6 +1,6 @@
 # Master VM (2 core, 4 GB)
 resource "proxmox_vm_qemu" "master" {
-  name        = "alpine-k8s-master-${var.proxmox_node_id}"
+  name        = "alpine-k3s-master-${var.proxmox_node_id}"
   target_node = "worker-${var.proxmox_node_id}"
 
   clone      = var.template_vm_id
@@ -10,6 +10,9 @@ resource "proxmox_vm_qemu" "master" {
   memory  = 4096
 
   scsihw = "virtio-scsi-pci"
+  bootdisk = "scsi0"
+  boot = "order=scsi0"
+
   disk {
     slot         = "scsi0"
     size         = "24G"
@@ -24,10 +27,12 @@ resource "proxmox_vm_qemu" "master" {
 
   agent     = 1
   ciuser    = "root"
-  sshkeys  = var.ssh_public_key
+  sshkeys = <<EOF
+    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQNiluz7sw/wxHWwAaJXRwsFG2AUFFIhhphRujjYh5f root@pam
+    EOF
 
   # (Optional) IP Address and Gateway
-  ipconfig0 = "ip=10.12.41.1${var.proxmox_node_id}0/16,gw=10.12.10.1"
+  ipconfig0 = "ip=10.12.41.${var.proxmox_node_id}0/16,gw=10.12.10.1"
 
   # (Optional) Name servers
   nameserver = "10.12.10.1"
@@ -37,7 +42,7 @@ resource "proxmox_vm_qemu" "master" {
 # Worker VMs (each 1 core, 2 GB)
 resource "proxmox_vm_qemu" "worker" {
   count       = 2
-  name        = "alpine-k8s-worker-${var.proxmox_node_id}0${count.index + 1}"
+  name        = "alpine-k3s-worker-${var.proxmox_node_id}0"
   target_node = "worker-${var.proxmox_node_id}"
 
   clone      = var.template_vm_id
@@ -47,6 +52,9 @@ resource "proxmox_vm_qemu" "worker" {
   memory  = 2048
 
   scsihw = "virtio-scsi-pci"
+  bootdisk = "scsi0"
+  boot = "order=scsi0"
+
   disk {
     slot         = "scsi0"
     size         = "16G"
@@ -61,7 +69,10 @@ resource "proxmox_vm_qemu" "worker" {
 
   agent     = 1
   ciuser    = "root"
-  sshkeys  = var.ssh_public_key
+  sshkeys = <<EOF
+    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQNiluz7sw/wxHWwAaJXRwsFG2AUFFIhhphRujjYh5f root@pam
+    EOF
+
   # (Optional) IP Address and Gateway
   ipconfig0 = "ip=10.12.41.${var.proxmox_node_id}${count.index + 1}/16,gw=10.12.10.1"
 

@@ -26,8 +26,8 @@ variable "proxmox_password" {
 }
 
 variable "template_vm_id" {
-  description = "VMID of an existing Alpine cloud-init template in Proxmox"
-  type        = number
+  description = "Alpine cloud-init template name in Proxmox"
+  type        = string
 }
 
 variable "vm_storage" {

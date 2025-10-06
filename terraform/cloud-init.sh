@@ -58,27 +58,6 @@ export username=flynn
 #Name of your storage
 export storage=local-lvm
 
-#The images that I've found premade
-#Feel free to add your own
-
-## Debian
-wget "https://cloud.debian.org/images/cloud/trixie/latest/debian-12-genericcloud-amd64.qcow2"
-create_template 900 "debian-12" "debian-12-genericcloud-amd64.qcow2"
-#Trixie (13) (stable)
-wget "https://cloud.debian.org/images/cloud/trixie/latest/debian-13-genericcloud-amd64.qcow2"
-create_template 901 "debian-13" "debian-13-genericcloud-amd64.qcow2"
-
-## Ubuntu
-#20.04 (Focal Fossa) LTS (really old at this point)
-#wget "https://cloud-images.ubuntu.com/releases/focal/release/ubuntu-20.04-server-cloudimg-amd64.img"
-#create_template 910 "temp-ubuntu-20-04" "ubuntu-20.04-server-cloudimg-amd64.img"
-#22.04 (Jammy Jellyfish) LTS
-wget "https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64.img"
-create_template 910 "ubuntu-22-04" "ubuntu-22.04-server-cloudimg-amd64.img"
-#24.04 (Noble Numbat) LTS
-wget "https://cloud-images.ubuntu.com/releases/24.04/release/ubuntu-24.04-server-cloudimg-amd64.img"
-create_template 911 "ubuntu-24-04" "ubuntu-24.04-server-cloudimg-amd64.img"
-
 ## Alpine Linux
 #Alpine 3.22.1
 wget "https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/cloud/generic_alpine-3.22.1-x86_64-bios-cloudinit-r0.qcow2"

@@ -1,6 +1,6 @@
 # Master VM (2 core, 4 GB)
 resource "proxmox_vm_qemu" "master" {
-  name        = "alpine-k3s-master-${var.proxmox_node_id}"
+  name        = "alpine-k3s-master-${var.proxmox_node_id}0"
   target_node = "worker-${var.proxmox_node_id}"
 
   clone      = var.template_vm_id

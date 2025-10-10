@@ -20,7 +20,7 @@ resource "proxmox_vm_qemu" "master" {
   }
 
   network {
-    id = var.proxmox_node_id
+    id = 0
     model  = "virtio"
     bridge = "vmbr0"
   }
@@ -62,7 +62,7 @@ resource "proxmox_vm_qemu" "worker" {
   }
 
   network {
-    id = count.index + 1 + (10 * var.proxmox_node_id)
+    id = 0
     model  = "virtio"
     bridge = "vmbr0"
   }

@@ -9,3 +9,4 @@ docker-compose.env
 .terraform*
 *.tfstate
 *.tfstate.*
+*.tfvars

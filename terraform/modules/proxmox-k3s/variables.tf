@@ -23,6 +23,7 @@ variable "proxmox_password" {
   description = "Proxmox password or API token secret"
   type        = string
   sensitive   = true
+  default     = "no-password"
 }
 
 variable "template_vm_id" {
@@ -34,5 +35,5 @@ variable "template_vm_id" {
 variable "ssh_public_key" {
   description = "Ansible SSH public key to install in the VMs"
   type        = string
-  default     = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQNiluz7sw/wxHWwAaJXRwsFG2AUFFIhhphRujjYh5f"
+  default     = "no-key"
 }

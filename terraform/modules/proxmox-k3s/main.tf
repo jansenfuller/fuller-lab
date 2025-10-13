@@ -27,9 +27,7 @@ resource "proxmox_vm_qemu" "master" {
 
   agent     = 1
   ciuser    = "root"
-  sshkeys = <<EOF
-    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQNiluz7sw/wxHWwAaJXRwsFG2AUFFIhhphRujjYh5f root@pam
-    EOF
+  sshkeys   = var.ssh_public_key
 
   # (Optional) IP Address and Gateway
   ipconfig0 = "ip=10.12.41.${var.proxmox_node_id}0/16,gw=10.12.10.1"
@@ -69,9 +67,7 @@ resource "proxmox_vm_qemu" "worker" {
 
   agent     = 1
   ciuser    = "root"
-  sshkeys = <<EOF
-    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIQNiluz7sw/wxHWwAaJXRwsFG2AUFFIhhphRujjYh5f root@pam
-    EOF
+  sshkeys   = var.ssh_public_key
 
   # (Optional) IP Address and Gateway
   ipconfig0 = "ip=10.12.41.${var.proxmox_node_id}${count.index + 1}/16,gw=10.12.10.1"

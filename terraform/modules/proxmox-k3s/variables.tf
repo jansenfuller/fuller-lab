@@ -35,5 +35,5 @@ variable "template_vm_id" {
 variable "ssh_public_key" {
   description = "Ansible SSH public key to install in the VMs"
   type        = string
-  default     = "no-key"
+  default     = "vars-no-key"
 }

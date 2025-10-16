@@ -1,6 +1,0 @@
-# group_vars/workers.yml
-ansible_user: ansible
-ansible_api_token: "REPLACE_WITH_TOKEN"
-# Alternative secure options
-# api_token: "{{ lookup('env','API_TOKEN') }}"
-# store api_token in Ansible Vault for production

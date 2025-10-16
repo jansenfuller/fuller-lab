@@ -1,0 +1,26 @@
+test:
+  hosts:
+    alpine.orb.local:
+
+workers:
+  hosts:
+    10.12.41.10[1:3]:
+  vars:
+    ansible_user: "flynn"
+    ansible_port: 1122
+    api_token: "{{ ansible_api_token }}"
+
+master_nodes:
+  hosts:
+    10.12.41.[1:3]0:
+
+worker_nodes:
+  hosts:
+    10.12.41.[11:13]:
+    10.12.41.[21:23]:
+    10.12.41.[31:33]:
+
+nodes:
+  children:
+    master_nodes:
+    worker_nodes:

@@ -1,0 +1,9 @@
+proxmox:
+  hosts:
+    10.12.30.2:
+  vars:
+    ansible_port: 1122
+
+lxcs:
+  hosts:
+    10.12.40.[2:9]:

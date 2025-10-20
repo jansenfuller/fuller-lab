@@ -127,7 +127,7 @@ CUSTOM_HOOK=1
 # This option does not have any effect if CUSTOM_HOOK is set to 0
 # Use NAME for a friendly name, CMD for the command itself.
 BEFORE_HOOK_NAME="CMD"
-BEFORE_HOOK_CMD="curl -H 'Authorization: Bearer tk_imctf74zn7he9tce7d1nuzqc3mwji' -H 'Title: Begin SnapRAID Scan' -d 'SnapRAID scan is starting' https://ntfy.062625.xyz/proxmox"
+BEFORE_HOOK_CMD="curl -H 'Authorization: Bearer tk_*****' -H 'Title: Begin SnapRAID Scan' -d 'SnapRAID scan is starting' https://ntfy.sh/proxmox"
 
 # Custom hook after SnapRAID activities
 # This custom hook executes after SnapRAID operations and will be the
@@ -135,7 +135,7 @@ BEFORE_HOOK_CMD="curl -H 'Authorization: Bearer tk_imctf74zn7he9tce7d1nuzqc3mwji
 # This option does not have any effect if CUSTOM_HOOK is set to 0
 # Use NAME for a friendly name, CMD for the command itself.
 AFTER_HOOK_NAME="CMD"
-AFTER_HOOK_CMD="curl -H 'Authorization: Bearer tk_imctf74zn7he9tce7d1nuzqc3mwji' -H 'Title: SnapRAID Scan Complete' -d 'SnapRAID scan has finished' https://ntfy.062625.xyz/proxmox"
+AFTER_HOOK_CMD="curl -H 'Authorization: Bearer tk_*****' -H 'Title: SnapRAID Scan Complete' -d 'SnapRAID scan has finished' https://ntfy.sh/proxmox"
 
 ####################### USER CONFIGURATION END #######################
 

@@ -24,13 +24,13 @@ services:
       - ${PROFILE_LOCATION}:/data/profile
       - ${ENCODED_VIDEO_LOCATION}:/data/encoded-video
       - ${BACKUP_LOCATION}:/data/backups
-      - /mnt/storage/photos:/mnt/photos
+      - /mnt/photos:/mnt/photos
       - /etc/localtime:/etc/localtime:ro
     ports:
       - '2003:2283'
     depends_on:
-      - immich-redis
-      - immich-database
+      - redis
+      - database
     restart: always
     healthcheck:
       disable: false
@@ -49,14 +49,14 @@ services:
     healthcheck:
       disable: false
 
-  immich-redis:
+  redis:
     container_name: immich_redis
-    image: docker.io/valkey/valkey:8-bookworm@sha256:fea8b3e67b15729d4bb70589eb03367bab9ad1ee89c876f54327fc7c6e618571
+    image: docker.io/valkey/valkey:8@sha256:81db6d39e1bba3b3ff32bd3a1b19a6d69690f94a3954ec131277b9a26b95b3aa
     healthcheck:
       test: redis-cli ping || exit 1
     restart: always
 
-  immich-database:
+  database:
     container_name: immich_postgres
     image: ghcr.io/immich-app/postgres:17-vectorchord0.5.3
     environment:
@@ -66,8 +66,6 @@ services:
       POSTGRES_INITDB_ARGS: '--data-checksums'
       # Uncomment the DB_STORAGE_TYPE: 'HDD' var if your database isn't stored on SSDs
       DB_STORAGE_TYPE: 'HDD'
-    ports:
-      - '9100:5432'
     volumes:
       # Do not edit the next line. If you want to change the database storage location on your system, edit the value of DB_DATA_LOCATION in the .env file
       - ${DB_DATA_LOCATION}:/var/lib/postgresql/data

@@ -18,7 +18,7 @@ services:
     environment:
       AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
       AUTHENTIK_REDIS__HOST: redis
-      AUTHENTIK_POSTGRESQL__HOST: 10.12.31.2
+      AUTHENTIK_POSTGRESQL__HOST: postgres.ff.home
       AUTHENTIK_POSTGRESQL__PORT: 9100
       AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik}
       AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik}
@@ -41,7 +41,7 @@ services:
     environment:
       AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
       AUTHENTIK_REDIS__HOST: redis
-      AUTHENTIK_POSTGRESQL__HOST: 10.12.31.2
+      AUTHENTIK_POSTGRESQL__HOST: postgres.ff.home
       AUTHENTIK_POSTGRESQL__PORT: 9100
       AUTHENTIK_POSTGRESQL__USER: ${PG_USER:-authentik}
       AUTHENTIK_POSTGRESQL__NAME: ${PG_DB:-authentik}

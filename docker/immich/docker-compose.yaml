@@ -24,7 +24,7 @@ services:
       - ${PROFILE_LOCATION}:/data/profile
       - ${ENCODED_VIDEO_LOCATION}:/data/encoded-video
       - ${BACKUP_LOCATION}:/data/backups
-      - /mnt/photos:/mnt/photos
+      - /mnt/storage/photos:/mnt/photos
       - /etc/localtime:/etc/localtime:ro
     ports:
       - '2003:2283'
@@ -65,9 +65,7 @@ services:
       POSTGRES_DB: ${DB_DATABASE_NAME}
       POSTGRES_INITDB_ARGS: '--data-checksums'
       # Uncomment the DB_STORAGE_TYPE: 'HDD' var if your database isn't stored on SSDs
-      DB_STORAGE_TYPE: 'HDD'
-    ports:
-      - '9100:5432'
+      # DB_STORAGE_TYPE: 'HDD'
     volumes:
       # Do not edit the next line. If you want to change the database storage location on your system, edit the value of DB_DATA_LOCATION in the .env file
       - ${DB_DATA_LOCATION}:/var/lib/postgresql/data

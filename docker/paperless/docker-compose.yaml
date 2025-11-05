@@ -41,23 +41,22 @@ services:
     ports:
       - "2223:8000"
     volumes:
-      - /mnt/storage/documents/data:/usr/src/paperless/data
-      - /mnt/storage/documents/media:/usr/src/paperless/media
-      - /mnt/storage/documents/export:/usr/src/paperless/export
-      - /mnt/storage/documents/import:/usr/src/paperless/consume
-      - /mnt/storage/documents/trash:/mnt/storage/documents/trash
-    env_file: docker-compose.env
+      - ${DOCUMENTS_ROOT}/data:/usr/src/paperless/data
+      - ${DOCUMENTS_ROOT}/media:/usr/src/paperless/media
+      - ${DOCUMENTS_ROOT}/export:/usr/src/paperless/export
+      - ${DOCUMENTS_ROOT}/import:/usr/src/paperless/consume
+      - ${DOCUMENTS_ROOT}/trash:/mnt/storage/documents/trash
     environment:
       PAPERLESS_REDIS: redis://redis:6379
-      PAPERLESS_DBHOST: 10.12.30.2
+      PAPERLESS_DBHOST: ${DB_HOST}
       PAPERLESS_DBPORT: 9113
       PAPERLESS_DBNAME: paperless
       PAPERLESS_DBUSER: ${DB_USERNAME}
       PAPERLESS_DBPASS: ${DB_PASSWORD}
       PAPERLESS_CONSUMER_POLLING: 120
 
-      PAPERLESS_CONSUMPTION_DIR: /mnt/storage/documents/import
-      PAPERLESS_EMPTY_TRASH_DIR: /mnt/storage/documents/trash
+      PAPERLESS_CONSUMPTION_DIR: ${DOCUMENTS_ROOT}/import
+      PAPERLESS_EMPTY_TRASH_DIR: ${DOCUMENTS_ROOT}/trash
 
       PAPERLESS_ADMIN_USER: admin@paperless.com
       PAPERLESS_ADMIN_PASSWORD: ${ADMIN_PASSWORD}

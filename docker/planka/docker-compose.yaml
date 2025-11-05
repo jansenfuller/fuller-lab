@@ -9,8 +9,8 @@ services:
     ports:
       - 3334:1337
     environment:
-      - BASE_URL=http://10.12.30.2:3334
-      - DATABASE_URL=postgresql://planka:${SECRET_KEY}@10.12.31.2:9100/planka
+      - BASE_URL=http://10.12.40.100:3334
+      - DATABASE_URL=postgresql://${DB_USERNAME}:${SECRET_KEY}@${DB_HOST}:9100/${DB_NAME}
       - SECRET_KEY=${SECRET_KEY}
 
       # - TRUST_PROXY=0
@@ -31,17 +31,7 @@ services:
 
       # - SHOW_DETAILED_AUTH_ERRORS=false # Set to true to show more detailed authentication error messages. It should not be enabled without a rate limiter for security reasons.
       # - ALLOW_ALL_TO_CREATE_PROJECTS=true
-
-      # Optional fields: accessToken, events, excludedEvents
-      # - |
-      #   WEBHOOKS=[{
-      #     "url": "http://localhost:3001",
-      #     "accessToken": "notaccesstoken",
-      #     "events": ["cardCreate", "cardUpdate", "cardDelete"],
-      #     "excludedEvents": ["notificationCreate", "notificationUpdate"]
-      #   }]
-      #
-
+      
 volumes:
   user-avatars:
   project-background-images:

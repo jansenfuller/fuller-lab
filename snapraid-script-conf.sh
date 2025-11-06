@@ -52,7 +52,7 @@ DISCORD_WEBHOOK_URL="your-webhook-url"
 # This script will pass the following parameters to HOOK_NOTIFICATION:
 # 1st parameter will be the subject
 # 2nd parameter will be the body
-HOOK_NOTIFICATION="curl -H "Authorization: Bearer tk_imctf74zn7he9tce7d1nuzqc3mwji" -H "Title: $1" -d "$2" https://ntfy.062625.xyz/proxmox"
+HOOK_NOTIFICATION="curl -H "Authorization: Bearer tk_XXXXX" -H "Title: $1" -d "$2" https://ntfy.062625.xyz/proxmox"
 
 ### SCRIPT AND SNAPRAID SETTINGS ###
 
@@ -200,7 +200,7 @@ CUSTOM_HOOK=1
 # This option does not have any effect if CUSTOM_HOOK is set to 0
 # Use NAME for a friendly name, CMD for the command itself.
 BEFORE_HOOK_NAME="CMD"
-BEFORE_HOOK_CMD="curl -H "Authorization: Bearer tk_imctf74zn7he9tce7d1nuzqc3mwji" -H "Title: Begin SnapRAID Scan" -d "SnapRAID scan is starting" https://ntfy.062625.xyz/proxmox"
+BEFORE_HOOK_CMD="curl -H "Authorization: Bearer tk_XXXXX" -H "Title: Begin SnapRAID Scan" -d "SnapRAID scan is starting" https://ntfy.062625.xyz/proxmox"
 
 # Custom hook after SnapRAID activities
 # This custom hook executes after SnapRAID operations and will be the
@@ -208,7 +208,7 @@ BEFORE_HOOK_CMD="curl -H "Authorization: Bearer tk_imctf74zn7he9tce7d1nuzqc3mwji
 # This option does not have any effect if CUSTOM_HOOK is set to 0
 # Use NAME for a friendly name, CMD for the command itself.
 AFTER_HOOK_NAME="CMD"
-AFTER_HOOK_CMD="curl -H "Authorization: Bearer tk_imctf74zn7he9tce7d1nuzqc3mwji" -H "Title: SnapRAID Scan Complete" -d "SnapRAID scan has finished" https://ntfy.062625.xyz/proxmox"
+AFTER_HOOK_CMD="curl -H "Authorization: Bearer tk_XXXXX" -H "Title: SnapRAID Scan Complete" -d "SnapRAID scan has finished" https://ntfy.062625.xyz/proxmox"
 
 ####################### USER CONFIGURATION END #######################
 

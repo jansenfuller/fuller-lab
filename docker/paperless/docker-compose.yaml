@@ -49,7 +49,7 @@ services:
     environment:
       PAPERLESS_REDIS: redis://redis:6379
       PAPERLESS_DBHOST: ${DB_HOST}
-      PAPERLESS_DBPORT: 9113
+      PAPERLESS_DBPORT: 9100
       PAPERLESS_DBNAME: paperless
       PAPERLESS_DBUSER: ${DB_USERNAME}
       PAPERLESS_DBPASS: ${DB_PASSWORD}
@@ -63,6 +63,4 @@ services:
 
 
 volumes:
-  data:
-  media:
   redisdata:

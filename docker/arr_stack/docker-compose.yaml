@@ -5,11 +5,11 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/UTC
+      - TZ=America/Denver
     volumes:
       - /mnt/downloads/radarr_config:/config
       - /mnt/downloads/movies:/movies #optional
-      - /mnt/downloads:/downloads #optional
+      - /mnt/downloads/incomplete:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -20,11 +20,11 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/UTC
+      - TZ=America/Denver
     volumes:
       - /mnt/downloads/sonarr_config:/config
       - /mnt/downloads/shows:/tv #optional
-      - /mnt/downloads:/downloads #optional
+      - /mnt/downloads/incomplete:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -35,7 +35,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/UTC
+      - TZ=America/Denver
     volumes:
       - /mnt/downloads/bazarr_config:/config
       - /mnt/downloads/movies:/movies #optional

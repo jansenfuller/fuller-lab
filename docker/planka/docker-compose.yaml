@@ -9,7 +9,7 @@ services:
     ports:
       - 3334:1337
     environment:
-      - BASE_URL=http://10.12.40.100:3334
+      - BASE_URL=https://board.domain.com
       - DATABASE_URL=postgresql://${DB_USERNAME}:${SECRET_KEY}@${DB_HOST}:9100/${DB_NAME}
       - SECRET_KEY=${SECRET_KEY}
 

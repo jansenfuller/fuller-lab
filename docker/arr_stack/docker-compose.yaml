@@ -7,9 +7,9 @@ services:
       - PGID=1000
       - TZ=America/Denver
     volumes:
-      - /mnt/storage/downloads/radarr_config:/config
-      - /mnt/storage/downloads/movies:/movies #optional
-      - /mnt/storage/downloads/incomplete:/downloads #optional
+      - /mnt/media/radarr_config:/config
+      - /mnt/media/movies:/movies #optional
+      - /mnt/media/incomplete:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -22,9 +22,9 @@ services:
       - PGID=1000
       - TZ=America/Denver
     volumes:
-      - /mnt/storage/downloads/sonarr_config:/config
-      - /mnt/storage/downloads/shows:/tv #optional
-      - /mnt/storage/downloads/incomplete:/downloads #optional
+      - /mnt/media/sonarr_config:/config
+      - /mnt/media/shows:/tv #optional
+      - /mnt/media/incomplete:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -37,9 +37,9 @@ services:
       - PGID=1000
       - TZ=America/Denver
     volumes:
-      - /mnt/storage/downloads/bazarr_config:/config
-      - /mnt/storage/downloads/movies:/movies #optional
-      - /mnt/storage/downloads/shows:/tv #optional
+      - /mnt/media/bazarr_config:/config
+      - /mnt/media/movies:/movies #optional
+      - /mnt/media/shows:/tv #optional
     ports:
       - 6767:6767
     restart: unless-stopped

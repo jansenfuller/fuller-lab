@@ -1,0 +1,30 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: planka
+  namespace: planka
+spec:
+  valuesContent: |-
+    secretKey: "key"
+
+    admin_email: ""
+    admin_password: ""
+    admin_name: ""
+    admin_username: ""
+
+    base_url: ""
+
+    postgresql:
+      enabled: false
+
+    dburl: ""
+
+    oidc:
+      enabled: true
+      clientId: ""
+      clientSecret: ""
+      issuerUrl: ""
+      admin:
+        roles:
+          - planka-admin
+

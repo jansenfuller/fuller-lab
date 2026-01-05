@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: planka
+---
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: planka
+  namespace: kube-system
+spec:
+  repo: http://plankanban.github.io/planka
+  chart: planka
+  targetNamespace: plank 

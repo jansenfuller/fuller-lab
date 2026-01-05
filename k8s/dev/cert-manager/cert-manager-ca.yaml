@@ -1,0 +1,48 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: fullerfamily-tls
+  namespace: cert-manager
+spec:
+  secretName: fullerfamily-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-staging
+  commonName: fullerfamily.cc
+  dnsNames:
+    - fullerfamily.cc
+    - www.fullerfamily.cc
+    - "*.fullerfamily.cc"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: 062625-tls
+  namespace: cert-manager
+spec:
+  secretName: 062625-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-staging
+  commonName: 062625.xyz
+  dnsNames:
+    - 062625.xyz
+    - www.062625.xyz
+    - "*.062625.xyz"
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: "$CERT_MANAGER_CONTACT_EMAIL"
+    privateKeySecretRef:
+      name: letsencrypt-staging-account-key
+    solvers:
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api-token

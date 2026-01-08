@@ -1,12 +1,19 @@
-apiVersion: gateway.networking.k8s.io/v1
-kind: Gateway
-metadata:
-  name: envoy-gateway
-  namespace: envoy-gateway-system
-spec:
+apiVersion: gateway.networking.k8s.io/v1 
+kind: GatewayClass 
+metadata: 
+  name: envoy-gateway-class 
+spec: 
+  controllerName: gateway.envoyproxy.io/gatewayclass-controller 
+--- 
+apiVersion: gateway.networking.k8s.io/v1 
+kind: Gateway 
+metadata: 
+  name: envoy-gateway 
+  namespace: envoy-gateway-system 
+spec: 
   gatewayClassName: envoy-gateway-class
   listeners:
-    - name: https
+    - name: https-fullerfamily
       protocol: HTTPS
       port: 443
       hostname: "*.fullerfamily.cc"
@@ -16,7 +23,7 @@ spec:
           - kind: Secret
             group: ""
             name: fullerfamily-tls
-    - name: https
+    - name: https-062625
       protocol: HTTPS
       port: 443
       hostname: "*.062625.xyz"

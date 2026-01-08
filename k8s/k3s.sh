@@ -25,3 +25,6 @@ else
         echo "export K3S_URL=$1" >> .bashrc
         echo "export K3S_TOKEN=$2" >> .bashrc
 fi
+
+source .bashrc
+k get nodes

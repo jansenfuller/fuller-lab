@@ -7,6 +7,8 @@ sudo sed -i '/ swap / s/^/#/' /etc/fstab
 # Turn off swap manually to continue
 sudo swapoff -a
 
+cd ~
+
 mv .bashrc .bashrc_original
 
 # Run install for master nodes

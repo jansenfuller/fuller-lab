@@ -10,7 +10,7 @@ sudo swapoff -a
 # Change working directory for new bashrc
 cd ~
 
-mv .bashrc .bashrc_original
+mv .bashrc .bashrc_original || true
 
 # Run install for master nodes
 if [ "$1" == "server" ]; then

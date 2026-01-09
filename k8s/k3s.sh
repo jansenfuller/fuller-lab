@@ -13,7 +13,7 @@ cd ~
 mv .bashrc .bashrc_original
 
 # Run install for master nodes
-if [ $1 == "server" ]; then
+if [ "$1" == "server" ]; then
     # Install K3S
     curl -sfL https://get.k3s.io | K3S_URL=$2 K3S_TOKEN=$3 sh -s - server --tls-san load_balancer_ip_or_hostname
 
@@ -32,7 +32,7 @@ if [ $1 == "server" ]; then
     echo "export K3S_TOKEN=$2" >> .bashrc
 
 # Run install for worker nodes
-elif [ $1 == "agent" ]; then
+elif [ "$1" == "agent" ]; then
     # Install K3S Agent
     curl -sfL https://get.k3s.io | K3S_URL=$2 K3S_TOKEN=$3 sh -s - agent
     wget -O .bashrc https://raw.githubusercontent.com/jansenfuller/fuller-lab/refs/heads/master/k8s/dev/serverrc.sh
@@ -41,7 +41,7 @@ elif [ $1 == "agent" ]; then
     echo "export K3S_URL=$1" >> .bashrc
     echo "export K3S_TOKEN=$2" >> .bashrc
 
-else 
+else
     curl -sfL https://get.k3s.io | K3S_TOKEN=$1 sh -s - server --cluster-init --tls-san load_balancer_ip_or_hostname
 
     # Download and set new .bashrc

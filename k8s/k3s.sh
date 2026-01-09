@@ -55,5 +55,5 @@ else
     sudo apt-get install helm
 fi
 
-source .bashrc
+source ~/.bashrc
 k get nodes

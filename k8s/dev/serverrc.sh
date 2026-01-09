@@ -1,2 +1,2 @@
-export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+export KUBE_CONFIG=/etc/rancher/k3s/k3s.yaml
 alias k='kubectl'

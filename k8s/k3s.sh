@@ -42,7 +42,8 @@ elif [ "$1" == "agent" ]; then
     echo "export K3S_TOKEN=$2" >> .bashrc
 
 else
-    curl -sfL https://get.k3s.io | K3S_TOKEN=$1 sh -s - server --cluster-init --tls-san load_balancer_ip_or_hostname
+    ip=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
+    curl -sfL https://get.k3s.io | K3S_TOKEN=$1 sh -s - server --cluster-init --tls-san $ip load_balancer_ip_or_hostname
 
     # Download and set new .bashrc
     wget -O .bashrc https://raw.githubusercontent.com/jansenfuller/fuller-lab/refs/heads/master/k8s/dev/serverrc.sh

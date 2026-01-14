@@ -26,6 +26,12 @@ spec:
         database: "authentik"
 
     server:
+      ingress:
+        ingressClassName: traefik
+        enabled: true
+        https: true
+        hosts:
+            - login.fullerfamily.cc
       route:
         main:
           enabled: true

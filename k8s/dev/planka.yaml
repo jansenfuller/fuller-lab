@@ -13,11 +13,11 @@ spec:
   chart: planka
   targetNamespace: planka
   valuesContent: |-
-    secretKey: "key"
+    secretKey: "XXXXX"
 
     admin_email: "XXXXX"
     admin_password: "XXXXX"
-    admin_name: "Admin"
+    admin_name: "Admin Planka"
     admin_username: "admin"
 
     base_url: "board.062625.xyz"
@@ -29,9 +29,9 @@ spec:
 
     oidc:
       enabled: true
-      clientId: ""
-      clientSecret: ""
-      issuerUrl: ""
+      clientId: "XXXXX"
+      clientSecret: "XXXXX"
+      issuerUrl: "XXXXX"
       admin:
         roles:
           - planka-admin

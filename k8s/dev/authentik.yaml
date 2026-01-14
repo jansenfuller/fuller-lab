@@ -14,6 +14,11 @@ spec:
     authentik:
       enabled: true
       secret_key: "XXXXX"
+      postgresql:
+        host: "postgres.ff.home"
+        user: "authentik"
+        password: "XXXXX"
+        database: "authentik"
 
     server:
       route:
@@ -23,28 +28,6 @@ spec:
             - login.fullerfamily.cc
           https: true
           httpsRedirect: true
-      volumes:
-        - name: authentik
-          secret:
-            secretName: authentik
-      volumeMounts:
-        - name: authentik
-          mountPath: /media
-        - name: authentik
-          mountPath: /custom-templates
-
-    worker:
-      volumes:
-        - name: authentik
-          secret:
-            secretName: authentik
-      volumeMounts:
-        - name: authentik
-          mountPath: /media
-        - name: certs
-          mountPath: /certs
-        - name: authentik
-          mountPath: /custom-templates
 
     redis:
       enabled: true

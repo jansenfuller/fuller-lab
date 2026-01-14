@@ -1,3 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  planka
+---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
@@ -6,21 +11,21 @@ metadata:
 spec:
   repo: http://plankanban.github.io/planka
   chart: planka
-  targetNamespace: plank
+  targetNamespace: planka
   valuesContent: |-
     secretKey: "key"
 
-    admin_email: ""
-    admin_password: ""
-    admin_name: ""
-    admin_username: ""
+    admin_email: "XXXXX"
+    admin_password: "XXXXX"
+    admin_name: "Admin"
+    admin_username: "admin"
 
-    base_url: ""
+    base_url: "board.062625.xyz"
 
     postgresql:
       enabled: false
 
-    dburl: ""
+    dburl: "postgresql://planka:XXXXX@postgres.ff.home:9100/planka"
 
     oidc:
       enabled: true
@@ -30,3 +35,19 @@ spec:
       admin:
         roles:
           - planka-admin
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: planka-route
+  namespace: envoy-gateway-system
+spec:
+  parentRefs:
+    - name: envoy-gateway
+  hostnames:
+    - "board.062625.xyz"
+  rules:
+    - backendRefs:
+        - name: planka
+          namespace: planka
+          port: 1337

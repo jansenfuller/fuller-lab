@@ -1,3 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name:  authentik
+---
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
@@ -6,7 +11,7 @@ metadata:
 spec:
   targetNamespace: authentik
   createNamespace: true
-  version: 2025.10
+  version: "2025.10"
   chart: goauthentik/authentik
   repo: https://charts.goauthentik.io/
 

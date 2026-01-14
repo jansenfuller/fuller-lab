@@ -1,9 +1,12 @@
 apiVersion: helm.cattle.io/v1
-kind: HelmChartConfig
+kind: HelmChart
 metadata:
   name: planka
-  namespace: planka
+  namespace: kube-system
 spec:
+  repo: http://plankanban.github.io/planka
+  chart: planka
+  targetNamespace: plank
   valuesContent: |-
     secretKey: "key"
 
@@ -27,4 +30,3 @@ spec:
       admin:
         roles:
           - planka-admin
-

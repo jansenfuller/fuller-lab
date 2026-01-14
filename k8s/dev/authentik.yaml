@@ -1,0 +1,50 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: authentik
+  namespace: authentik
+spec:
+  targetNamespace: authentik
+  createNamespace: true
+  version: 2025.10
+  chart: goauthentik/authentik
+  repo: https://charts.goauthentik.io/
+
+  valuesContent: |-
+    authentik:
+      enabled: true
+      secret_key: "XXXXX"
+
+    server:
+      route:
+        main:
+          enabled: true
+          hostnames:
+            - login.fullerfamily.cc
+          https: true
+          httpsRedirect: true
+      volumes:
+        - name: authentik
+          secret:
+            secretName: authentik
+      volumeMounts:
+        - name: authentik
+          mountPath: /media
+        - name: authentik
+          mountPath: /custom-templates
+
+    worker:
+      volumes:
+        - name: authentik
+          secret:
+            secretName: authentik
+      volumeMounts:
+        - name: authentik
+          mountPath: /media
+        - name: certs
+          mountPath: /certs
+        - name: authentik
+          mountPath: /custom-templates
+
+    redis:
+      enabled: true

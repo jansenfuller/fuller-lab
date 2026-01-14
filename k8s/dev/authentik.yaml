@@ -6,13 +6,13 @@ metadata:
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
-  name: authentik
+  name: goauthentik
   namespace: authentik
 spec:
   targetNamespace: authentik
   createNamespace: true
-  version: "2025.10"
-  chart: goauthentik/authentik
+  version: "2025.10.3"
+  chart: authentik
   repo: https://charts.goauthentik.io/
 
   valuesContent: |-
@@ -21,6 +21,7 @@ spec:
       secret_key: "XXXXX"
       postgresql:
         host: "postgres.ff.home"
+        port: 9100
         user: "authentik"
         password: "XXXXX"
         database: "authentik"

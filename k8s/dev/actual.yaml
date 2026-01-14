@@ -2,68 +2,35 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: budget
-
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: actual-budget
-  namespace: budget
-spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: actual-budget
-  template:
-    metadata:
-      labels:
-        app: actual-budget
-    spec:
-      containers:
-      - name: actual-budget
-        # Replace this image with your Actual Budget container image
-        image: your-docker-registry/actual-budget:latest
-        ports:
-        - containerPort: 80
-
 ---
-apiVersion: v1
-kind: Service
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
 metadata:
-  name: actual-budget
-  namespace: budget
+  name: community-charts
+  namespace: actual-budget
 spec:
-  selector:
-    app: actual-budget
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-  type: ClusterIP
+  repo: https://community-charts.github.io/helm-charts
+  chart: actualbudget
+  targetNamespace: planka
+  version: "1.8.6"
+  valuesContent: |-
+    login:
+      allowedLoginMethods: ["openid"]
+      method: "openid"
+      openid:
+        discoveryUrl: ""
+        tokenExpiration: 3600
+        existingSecret:
+          name: "actualbudget-openid-secret"
+          clientIdKey: "XXXXX"
+          clientSecretKey: "XXXXX"
 
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: actual-budget
-  namespace: budget
-  annotations:
-    kubernetes.io/ingress.class: "nginx"
-spec:
-  tls:
-  - hosts:
-    - budget.fullerfamily.cc
-    # Create this Secret in the budget namespace (e.g. via cert-manager)
-    secretName: budget-fullerfamily-cc-tls
-  rules:
-  - host: budget.fullerfamily.cc
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: actual-budget
-            port:
-              number: 80
+    storageClass: "actualbudget"
+    accessModes:
+      - ReadWriteOnce
+
+    persistence:
+      enabled: true
+      size: 10Gi
+      existingClaim: "actualbudget"

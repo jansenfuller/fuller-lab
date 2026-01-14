@@ -7,7 +7,7 @@ apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
   name: planka
-  namespace: kube-system
+  namespace: planka
 spec:
   repo: http://plankanban.github.io/planka
   chart: planka

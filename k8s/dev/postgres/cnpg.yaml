@@ -4,7 +4,7 @@ metadata:
   name: cnpg
 ---
 apiVersion: helm.cattle.io/v1
-king: HelmChart
+kind: HelmChart
 metadata:
   name: cnpg
   namespace: cnpg

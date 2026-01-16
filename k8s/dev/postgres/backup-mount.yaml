@@ -7,7 +7,7 @@ metadata:
     app: cnpg-backup
 spec:
   s3:
-
+---
 # https://kubernetes.io/docs/concepts/storage/persistent-volumes/
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -21,11 +21,9 @@ spec:
   # GKE: standard
   # EKS: gp2 (custom)
   # Rook: rook-ceph-block,rook-ceph-fs
-  storageClassName: default
+  storageClassName: garage
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
       storage: 100Gi
----
-

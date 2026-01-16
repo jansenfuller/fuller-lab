@@ -1,0 +1,22 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: photos-nfs
+  namespace: immich
+provisioner: example.com/external-nfs
+parameters:
+  server: svr.ff.home
+  path: "/mnt/storage/backup_photos"
+  readOnly: "false"
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: photolibrary-nfs-pv
+  namespace: immich
+provisioner: example.com/external-nfs
+parameters:
+  server: svr.ff.home
+  path: "/mnt/storage/photos"
+  readOnly: "false"
+

@@ -1,0 +1,30 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: cluster-1
+  namespace: cnpg
+spec:
+  instances: 3
+
+  bootstrap:
+    initdb:
+      import:
+        type: monolith
+        databases:
+          - "*"
+        roles:
+          - "*"
+        source:
+          externalCluster: lxc-pg
+
+  storage:
+    size: 10Gi
+  externalClusters:
+    - name: lxc-pg
+      connectionParameters:
+        # Use the correct IP or host name for the source database
+        host: postgres.ff.home
+        user: postgres
+        dbname: postgres
+        password: ""
+        port: "9100"

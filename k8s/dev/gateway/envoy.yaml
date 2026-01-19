@@ -8,4 +8,12 @@ spec:
   version: v1.6.2
   targetNamespace: envoy-gateway-system
   createNamespace: true
+  valuesContent: |-
+    config:
+      envoyGateway:
+        gateway:
+          controlerName: gateway.envoyproxy.io/gatewayclass-controller
+        logging:
+          level:
+            default: info
 

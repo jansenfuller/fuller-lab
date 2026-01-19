@@ -12,24 +12,33 @@ metadata:
   namespace: envoy-gateway-system
 spec:
   gatewayClassName: envoy-gateway-class
+  infrastructure:
+    labels:
+      app: envoy-gateway
   listeners:
     - name: https-fullerfamily
       protocol: HTTPS
       port: 443
       hostname: "*.fullerfamily.cc"
+      allowedRoutes:
+        namespaces:
+          from: Same
       tls:
         mode: Terminate
         certificateRefs:
           - name: fullerfamily-tls
+            namespace: cert-manager
             kind: Secret
-            group: ""
     - name: https-062625
       protocol: HTTPS
       port: 443
       hostname: "*.062625.xyz"
+      allowedRoutes:
+        namespaces:
+          from: Same
       tls:
         mode: Terminate
         certificateRefs:
           - name: 062625-tls
+            namespace: cert-manager
             kind: Secret
-            group: ""

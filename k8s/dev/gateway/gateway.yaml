@@ -27,7 +27,6 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: fullerfamily-tls
-            namespace: cert-manager
             kind: Secret
     - name: https-062625
       protocol: HTTPS
@@ -40,5 +39,4 @@ spec:
         mode: Terminate
         certificateRefs:
           - name: 062625-tls
-            namespace: cert-manager
             kind: Secret

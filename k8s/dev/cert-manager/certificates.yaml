@@ -1,8 +1,7 @@
 apiVersion: cert-manager.io/v1
-kind: Issuer
+kind: ClusterIssuer
 metadata:
   name: letsencrypt-staging
-  namespace: cert-manager
 spec:
   acme:
     server: https://acme-staging-v02.api.letsencrypt.org/directory
@@ -21,11 +20,11 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: fullerfamily-tls
-  namespace: cert-manager
+  namespace: envoy-gateway-system
 spec:
   secretName: fullerfamily-tls
   issuerRef:
-    kind: Issuer
+    kind: ClusterIssuer
     name: letsencrypt-staging
   commonName: fullerfamily.cc
   dnsNames:
@@ -36,11 +35,11 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: 062625-tls
-  namespace: cert-manager
+  namespace: envoy-gateway-system
 spec:
   secretName: 062625-tls
   issuerRef:
-    kind: Issuer
+    kind: ClusterIssuer
     name: letsencrypt-staging
   commonName: 062625.xyz
   dnsNames:

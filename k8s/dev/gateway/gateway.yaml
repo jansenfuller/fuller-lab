@@ -22,7 +22,7 @@ spec:
       hostname: "*.fullerfamily.cc"
       allowedRoutes:
         namespaces:
-          from: Same
+          from: All
       tls:
         mode: Terminate
         certificateRefs:
@@ -34,7 +34,7 @@ spec:
       hostname: "*.062625.xyz"
       allowedRoutes:
         namespaces:
-          from: Same
+          from: All
       tls:
         mode: Terminate
         certificateRefs:

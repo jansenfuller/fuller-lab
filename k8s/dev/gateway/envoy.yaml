@@ -5,7 +5,7 @@ metadata:
   namespace: kube-system
 spec:
   chart: oci://docker.io/envoyproxy/gateway-helm
-  version: v1.6.1
+  version: v1.6.2
   targetNamespace: envoy-gateway-system
   createNamespace: true
 

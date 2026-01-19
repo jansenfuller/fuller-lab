@@ -1,15 +1,11 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name:  authentik
----
 apiVersion: helm.cattle.io/v1
 kind: HelmChart
 metadata:
   name: goauthentik
-  namespace: authentik
+  namespace: kube-system
 spec:
   targetNamespace: authentik
+  createNamespace: true
   version: "2025.10.3"
   chart: authentik
   repo: https://charts.goauthentik.io/

@@ -1,6 +1,6 @@
 # Backup postgres installation
 
-cd /mnt/storage/postgres
+cd /mnt/storage/databases
 
 docker exec -t immich_postgres pg_dumpall -c -U postgres > ./immich_dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql
 

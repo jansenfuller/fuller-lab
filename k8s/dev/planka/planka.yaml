@@ -1,0 +1,34 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: planka
+  namespace: kube-system
+spec:
+  repo: http://plankanban.github.io/planka
+  chart: planka
+  targetNamespace: planka
+  valuesContent: |-
+    existingSecretkeySecret: planka
+    baseUrl: board.062625.xyz
+
+    admin_email: "admin@planka.com"
+    admin_password: "golfer15"
+    admin_name: "Admin Planka"
+    admin_username: "admin"
+
+    existingDburlSecret: planka
+
+    postgresql:
+      enabled: false
+
+    oidc:
+      enabled: true
+      existingSecret: planka
+      issuerUrl: "https://login.fullerfamily.cc/application/o/planka/"
+      admin:
+        roles:
+          - planka-admin
+
+    extraEnv:
+      - name: OIDC_ENFORCED
+        value: true

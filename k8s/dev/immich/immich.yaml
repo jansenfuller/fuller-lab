@@ -4,9 +4,10 @@ metadata:
   name: immich
   namespace: immich
 spec:
-  repo: oci://ghcr.io/immich-app
-  chart: immich-charts
+  repo: https://immich-app.github.io/immich-charts
+  chart: immich
   targetNamespace: immich
+  createNamespace: true
   valuesContent: |-
     immich:
       persistence:

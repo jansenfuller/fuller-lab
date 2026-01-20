@@ -1,3 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: bw-auth-token
+  namespace: cert-manager
+type: Opaque
+stringData:
+  token: BW-SECRET-TOKEN
+---
 apiVersion: k8s.bitwarden.com/v1
 kind: BitwardenSecret
 metadata:
@@ -6,7 +15,7 @@ metadata:
     app.kubernetes.io/part-of: sm-operator
     app.kubernetes.io/created-by: sm-operator
   name: cloudflare
-  namespace: bitwarden
+  namespace: cert-manager
 spec:
   organizationId: eabfd0f9-cc8a-414c-a8ce-b3cf016546cc
   secretName: cloudflare

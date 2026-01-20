@@ -1,0 +1,13 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: bitwarden
+  namespace: kube-system
+spec:
+  chart: sm-operator
+  repo: https://charts.bitwarden.com/
+  targetNamespace: bitwarden
+  createNamespace: true
+  valuesContent: |-
+    settings:
+      cloudRegion: US

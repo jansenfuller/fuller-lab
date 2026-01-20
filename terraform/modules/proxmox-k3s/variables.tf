@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "proxmox" {
-  pm_api_url          = "https://worker-${var.proxmox_node_id}.ff.home:8006/api2/json"
+  pm_api_url          = "https://10.12.30.10${var.proxmox_node_id}:8006/api2/json"
   pm_api_token_id     = "terraform@pve!tat"
   pm_api_token_secret = var.proxmox_password
   pm_tls_insecure     = true

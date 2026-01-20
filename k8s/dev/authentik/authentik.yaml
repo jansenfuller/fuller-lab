@@ -12,22 +12,28 @@ spec:
 
   valuesContent: |-
     authentik:
+      log_level: "debug"
       enabled: true
-      secret_key: "XXXXX"
       postgresql:
-        host: "postgres.ff.home"
-        port: 9100
+        host: "cluster-1-rw.cnpg.svc.cluster.local"
         user: "authentik"
-        password: "XXXXX"
         database: "authentik"
 
+    global:
+      env:
+        - name: AUTHENTIK_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: authentik
+              key: secret-key
+
+        - name: AUTHENTIK_POSTGRESQL__PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: authentik
+              key: pg-password
+
     server:
-      ingress:
-        ingressClassName: traefik
-        enabled: true
-        https: true
-        hosts:
-            - login.fullerfamily.cc
       route:
         main:
           enabled: true

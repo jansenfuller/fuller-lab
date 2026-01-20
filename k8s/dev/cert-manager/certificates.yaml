@@ -13,7 +13,7 @@ spec:
           cloudflare:
             email: supercomputer74@gmail.com
             apiTokenSecretRef:
-              name: cloudflare-api-token
+              name: cloudflare
               key: api-token
 ---
 apiVersion: cert-manager.io/v1

@@ -25,7 +25,6 @@ spec:
         name: barman-cloud.cloudnative-pg.io
         parameters:
           barmanObjectName: cloudflare-r2-store
-          serverName: cloudflare-r2-store
 
   managed:
     services:

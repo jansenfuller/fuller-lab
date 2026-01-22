@@ -1,0 +1,43 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: nextcloud
+  namespace: kube-system
+spec:
+  repo: https://nextcloud.github.io/helm/
+  chart: nextcloud
+  targetNamespace: nextcloud
+  createNamespace: true
+  valuesContent: |-
+    nextcloud:
+      host: cloud.fullerfamily.cc
+      existingSecret:
+        enabled: true
+        secretName: nextcloud
+        username: login-username
+        password: login-password
+      trustedDomains:
+        - cloud.fullerfamily.cc
+    rbac:
+      enabled: true
+    internalDatabase:
+      enabled: false
+    externalDataBase:
+      enabled: true
+      type: postgresql
+      host: cluster-1-rw.cnpg.svc.cluster.local
+      user: nextcloud
+      database: nextcloud
+      existingSecret:
+        enabled: true
+        secretName: nextcloud
+        passwordKey: pg-password
+    persistence:
+      enabled: true
+      storageClassName: "-"
+      hostPath: "/data"
+      existingClaim: nextcloud-nfs-data
+      size: 100Gi
+
+
+

@@ -7,5 +7,4 @@ spec:
   repo: https://cloudnative-pg.github.io/charts
   chart: cloudnative-pg
   targetNamespace: cnpg
-  createNamespace: true
   version: "0.27.0"

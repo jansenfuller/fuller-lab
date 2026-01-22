@@ -7,4 +7,46 @@ spec:
   instances: 3
 
   storage:
-    size: 10Gi
+    size: 10G  
+
+  bootstrap:
+    recovery:
+      source: cloudflare-r2-store
+
+  plugins:
+    - name: barman-cloud.cloudnative-pg.io
+      isWALArchiver: true
+      parameters:
+        barmanObjectName: cloudflare-r2-store
+        
+  externalClusters:
+    - name: cloudflare-r2-store
+      plugin:
+        name: barman-cloud.cloudnative-pg.io
+        parameters:
+          barmanObjectName: cloudflare-r2-store
+          serverName: cloudflare-r2-store
+
+  managed:
+    services:
+      disabledDefaultServices: ["ro", "r"]
+      additional:
+      - selectorType: rw
+        serviceTemplate:
+          metadata:
+            name: immich-rw-lb
+          spec:
+            type: LoadBalancer
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: pg-main-backup
+spec:
+  cluster:
+    name: cluster-1
+  schedule: '0/10 * * * * *'
+  backupOwnerReference: self
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io

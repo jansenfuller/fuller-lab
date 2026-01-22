@@ -9,7 +9,7 @@ spec:
   targetNamespace: planka
   valuesContent: |-
     existingSecretkeySecret: planka
-    baseUrl: http://board.062625.xyz
+    baseUrl: https://board.062625.xyz
 
     admin_email: "admin@planka.com"
     admin_password: "golfer15"

@@ -20,6 +20,24 @@ spec:
         database: "authentik"
 
     global:
+      volumes:
+        - name: fullerfamily-tls-cert
+          secret: 
+            secretName: fullerfamily-tls
+            secretNamespace: cert-manager
+        - name: 062625-tls-cert
+          secret: 
+            secretName: 062625-tls
+            secretNamespace: cert-manager
+
+      volumeMounts:
+        - name: fullerfamily-tls-cert
+          mountPath: "/certs/fullerfamily"
+          readOnly: true
+        - name: 062625-tls-cert
+          mountPath: "/certs/062625"
+          readOnly: true
+
       env:
         - name: AUTHENTIK_SECRET_KEY
           valueFrom:

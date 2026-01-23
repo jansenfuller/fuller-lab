@@ -1,0 +1,30 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: fullerfamily-tls
+  namespace: authentik
+spec:
+  secretName: fullerfamily-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-staging
+  commonName: fullerfamily.cc
+  dnsNames:
+    - fullerfamily.cc
+    - "*.fullerfamily.cc"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: 062625-tls
+  namespace: authentik
+spec:
+  secretName: 062625-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt-staging
+  commonName: 062625.xyz
+  dnsNames:
+    - 062625.xyz
+    - "*.062625.xyz"
+

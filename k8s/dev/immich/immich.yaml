@@ -15,8 +15,16 @@ spec:
           existingClaim: immich-library-pvc
       configuration:
         trash:
-          enabled: false
-          days: 30
+          enabled: true
+          days: 90
+        oauth:
+          enabled: true
+          autoLaunch: true
+          autoRegister: false
+          buttonText: "Login with Single Sign-On"
+          clientId: "XXXXX"
+          clientSecret: "XXXXX"
+          issuerUrl: "https://login.fullerfamily.cc/application/o/immich/"
 
     server:
       controllers:
@@ -45,5 +53,3 @@ spec:
 
     valkey:
       enabled: true
-
-

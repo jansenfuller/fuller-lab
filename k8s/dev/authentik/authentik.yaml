@@ -6,7 +6,7 @@ metadata:
 spec:
   targetNamespace: authentik
   createNamespace: true
-  version: "2025.10.3"
+  version: "2025.12.1"
   chart: authentik
   repo: https://charts.goauthentik.io/
 
@@ -24,18 +24,28 @@ spec:
         - name: fullerfamily-tls-cert
           secret: 
             secretName: fullerfamily-tls
-            secretNamespace: cert-manager
+            defaultMode: 0644
+            items:
+              - key: tls.crt
+                path: fullerfamily.cc.pem
+              - key: tls.key
+                path: fullerfamily.cc.key
         - name: 062625-tls-cert
           secret: 
             secretName: 062625-tls
-            secretNamespace: cert-manager
+            defaultMode: 0644
+            items:
+              - key: tls.crt
+                path: 062625.xyz.pem
+              - key: tls.key
+                path: 062625.xyz.key
 
       volumeMounts:
         - name: fullerfamily-tls-cert
-          mountPath: "/certs/fullerfamily"
+          mountPath: "/certs/fullerfamily.cc"
           readOnly: true
         - name: 062625-tls-cert
-          mountPath: "/certs/062625"
+          mountPath: "/certs/062625.xyz"
           readOnly: true
 
       env:

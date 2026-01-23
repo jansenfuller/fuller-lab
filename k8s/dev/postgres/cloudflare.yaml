@@ -10,9 +10,9 @@ spec:
     s3Credentials:
       accessKeyId:
         name: cloudflare-r2
-        key: ACCESS_KEY_ID
+        key: access-key
       secretAccessKey:
         name: cloudflare-r2
-        key: ACCESS_SECRET_KEY
+        key: access-secret
     wal:
       compression: gzip

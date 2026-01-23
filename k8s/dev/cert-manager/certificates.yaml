@@ -11,7 +11,7 @@ spec:
     solvers:
       - dns01:
           cloudflare:
-            email: supercomputer74@gmail.com
+            email: $CLOUDFLARE_EMAIL
             apiTokenSecretRef:
               name: cloudflare
               key: api-token
@@ -20,7 +20,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: fullerfamily-tls
-  namespace: envoy-gateway-system
+  namespace: cert-manager
 spec:
   secretName: fullerfamily-tls
   issuerRef:
@@ -35,7 +35,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: 062625-tls
-  namespace: envoy-gateway-system
+  namespace: cert-manager
 spec:
   secretName: 062625-tls
   issuerRef:

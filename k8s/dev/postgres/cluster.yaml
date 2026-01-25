@@ -7,9 +7,18 @@ spec:
   instances: 3
 
   storage:
-    size: 10G  
+    size: 10Gi
 
   bootstrap:
+#    initdb:
+#      import:
+#        type: monolith
+#        databases:
+#          - "*"
+#        roles:
+#          - "*"
+#        source:
+#          externalCluster: lxc-pg
     recovery:
       source: cloudflare-r2-store
 
@@ -25,27 +34,26 @@ spec:
         name: barman-cloud.cloudnative-pg.io
         parameters:
           barmanObjectName: cloudflare-r2-store
-
-  managed:
-    services:
-      disabledDefaultServices: ["ro", "r"]
-      additional:
-      - selectorType: rw
-        serviceTemplate:
-          metadata:
-            name: immich-rw-lb
-          spec:
-            type: LoadBalancer
+    - name: lxc-pg
+      connectionParameters:
+        # Use the correct IP or host name for the source database
+        host: postgres.ff.home
+        user: postgres
+        dbname: postgres
+        password: ""
+        port: "9100"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
-  name: pg-main-backup
+  name: cluster-1
+  namespace: cnpg
 spec:
+  schedule: "0 */15 * * * *"  # At midnight every day
+  backupOwnerReference: cluster
   cluster:
     name: cluster-1
-  schedule: '0/10 * * * * *'
-  backupOwnerReference: self
+  immediate: true
   method: plugin
   pluginConfiguration:
     name: barman-cloud.cloudnative-pg.io

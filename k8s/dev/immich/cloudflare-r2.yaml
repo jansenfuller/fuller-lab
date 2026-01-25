@@ -2,11 +2,11 @@ apiVersion: barmancloud.cnpg.io/v1
 kind: ObjectStore
 metadata:
   name: cloudflare-r2-store
+  namespace: immich
 spec:
   configuration:
-    destinationPath: s3://backups-dev/
-    endpointURL: http://cloudflare
-    retentionPolicy: "30d"
+    destinationPath: s3://dev/cnpg-backup/
+    endpointURL: https://807bfaf0b06ab088aaa7c6be446cd2b3.r2.cloudflarestorage.com
     s3Credentials:
       accessKeyId:
         name: cloudflare-r2

@@ -1,0 +1,33 @@
+apiVersion: barmancloud.cnpg.io/v1
+kind: ObjectStore
+metadata:
+  name: cloudflare-r2-store
+  namespace: cnpg
+spec:
+  configuration:
+    destinationPath: s3://dev/cnpg-backup/
+    endpointURL: https://807bfaf0b06ab088aaa7c6be446cd2b3.r2.cloudflarestorage.com
+    s3Credentials:
+      accessKeyId:
+        name: cloudflare-r2
+        key: access-key
+      secretAccessKey:
+        name: cloudflare-r2
+        key: access-secret
+    wal:
+      compression: gzip
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: ScheduledBackup
+metadata:
+  name: cluster-1
+  namespace: cnpg
+spec:
+  schedule: "*/15 * * * * *"  # At midnight every day
+  backupOwnerReference: self
+  cluster:
+    name: cluster-1
+  immediate: true
+  method: plugin
+  pluginConfiguration:
+    name: barman-cloud.cloudnative-pg.io

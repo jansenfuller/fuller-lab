@@ -2,7 +2,9 @@ apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
   name: cluster-1
-  namespace: cnpg
+  namespace: cnpg-system
+  annotations:
+    cnpg.io/skipEmptyWalArchiveCheck: enabled
 spec:
   instances: 3
 
@@ -27,29 +29,21 @@ spec:
       isWALArchiver: true
       parameters:
         barmanObjectName: cloudflare-r2-store
-        
+
   externalClusters:
     - name: cloudflare-r2-store
       plugin:
         name: barman-cloud.cloudnative-pg.io
         parameters:
           barmanObjectName: cloudflare-r2-store
-    - name: lxc-pg
-      connectionParameters:
-        # Use the correct IP or host name for the source database
-        host: postgres.ff.home
-        user: postgres
-        dbname: postgres
-        password: ""
-        port: "9100"
 ---
 apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
   name: cluster-1
-  namespace: cnpg
+  namespace: cnpg-system
 spec:
-  schedule: "0 */15 * * * *"  # At midnight every day
+  schedule: "0 0 0 * * *"  # At midnight every day
   backupOwnerReference: cluster
   cluster:
     name: cluster-1

@@ -15,7 +15,7 @@ spec:
       log_level: "debug"
       enabled: true
       postgresql:
-        host: "cluster-1-rw.cnpg.svc.cluster.local"
+        host: "cluster-1-rw.cnpg-system.svc.cluster.local"
         user: "authentik"
         database: "authentik"
 

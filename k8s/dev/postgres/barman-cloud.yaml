@@ -6,5 +6,4 @@ metadata:
 spec:
   repo: https://cloudnative-pg.io/charts/
   chart: cloudnative-pg
-  targetNamespace: cnpg
-  createNamesapce: true
+  targetNamespace: cnpg-system

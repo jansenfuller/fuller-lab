@@ -4,6 +4,13 @@ metadata:
   name: cloudflare-r2-store
   namespace: immich
 spec:
+  retentionPolicy: "30d"
+  instanceSidecarConfiguration:
+    env:
+      - name: AWS_REQUEST_CHECKSUM_CALCULATION
+        value: when_required
+      - name: AWS_RESPONSE_CHECKSUM_VALIDATION
+        value: when_required
   configuration:
     destinationPath: s3://dev/cnpg-backup/
     endpointURL: https://807bfaf0b06ab088aaa7c6be446cd2b3.r2.cloudflarestorage.com
@@ -15,4 +22,5 @@ spec:
         name: cloudflare-r2
         key: access-secret
     wal:
-      compression: gzip
+      compression: bzip2
+      maxParallel: 6

@@ -5,18 +5,20 @@ resource "proxmox_vm_qemu" "master" {
 
   clone      = var.template_vm_id
   full_clone = true
+  os_type = "cloud-init"
 
   cpu { cores   = 2 }
   memory  = 4096
 
   scsihw = "virtio-scsi-pci"
   bootdisk = "scsi0"
-  boot = "order=scsi0"
 
   disk {
-    slot         = "scsi0"
-    size         = "24G"
-    storage      = "local-lvm"
+    slot = 0
+    size = "8G"
+    type = "scsi"
+    storage = "local-lvm"
+    iothread = 1
   }
 
   network {
@@ -25,8 +27,13 @@ resource "proxmox_vm_qemu" "master" {
     bridge = "vmbr0"
   }
 
+  serial {
+    id = 0
+    type = "/dev/tty0"
+  }
+
   agent     = 1
-  ciuser    = "root"
+  ciuser    = "flynn"
   sshkeys   = var.ssh_public_key
 
   # (Optional) IP Address and Gateway
@@ -51,12 +58,13 @@ resource "proxmox_vm_qemu" "worker" {
 
   scsihw = "virtio-scsi-pci"
   bootdisk = "scsi0"
-  boot = "order=scsi0"
 
   disk {
-    slot         = "scsi0"
-    size         = "16G"
-    storage      = "local-lvm"
+    slot = 0
+    size = "8G"
+    type = "scsi"
+    storage = "local-lvm"
+    iothread = 1
   }
 
   network {
@@ -65,8 +73,13 @@ resource "proxmox_vm_qemu" "worker" {
     bridge = "vmbr0"
   }
 
+  serial {
+    id = 0
+    type = "/dev/tty0"
+  }
+
   agent     = 1
-  ciuser    = "root"
+  ciuser    = "flynn"
   sshkeys   = var.ssh_public_key
 
   # (Optional) IP Address and Gateway

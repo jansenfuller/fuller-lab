@@ -20,9 +20,9 @@ function create_template() {
     #If you are in a cluster, you might need to change cpu type
     qm set $1 --memory 1024 --cores 4 --cpu host
     #Set boot device to new file
-    qm set $1 --scsi0 ${storage}:0,import-from="$(pwd)/$3",discard=on
+    qm set $1 --scsihw virtio-scsi-pci --scsi0 ${storage}:0,import-from="$(pwd)/$3",discard=on
     #Set scsi hardware as default boot disk using virtio scsi single
-    qm set $1 --boot order=scsi0 --scsihw virtio-scsi-single
+    qm set $1 --boot c --bootdisk scsi0
     #Enable Qemu guest agent in case the guest has it available
     qm set $1 --agent enabled=1,fstrim_cloned_disks=1
     #Add cloud-init device

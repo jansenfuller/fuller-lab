@@ -1,13 +1,11 @@
 source_directories:
     - /mnt/storage
-    - /root
-    - /etc
-    - /var
 
 repositories:
     # The local path or Borg URL of the repository.
     - path: /mnt/storage2/backup.borg
       label: backup
+      encryption: none
       append_only: false
 
 exclude_caches: true
@@ -43,7 +41,6 @@ log_file_format: '[{asctime}] {levelname}: {prefix}{message}'
 
 progress: true
 statistics: true
-list_details: true
 
 default_actions: true
 

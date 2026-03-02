@@ -1,0 +1,48 @@
+source_directories:
+    - /mnt/storage
+    - /root
+    - /etc
+    - /var
+
+repositories:
+    # The local path or Borg URL of the repository.
+    - path: /mnt/storage2/backup.borg
+      label: backup
+      append_only: false
+
+exclude_caches: true
+checkpoint_interval: 900
+
+retries: 5
+retry_wait: 30
+
+unknown_unencrypted_repo_access_is_ok: true
+
+keep_daily: 7
+keep_weekly: 4
+keep_monthly: 6
+
+# List of one or more consistency checks to run on a periodic basis
+# (if "frequency" is set) or every time borgmatic runs checks (if
+# "frequency" is omitted).
+checks:
+    - name: repository
+      frequency: 1 day
+    - name: data
+      frequency: 1 week
+    - name: extract
+      frequency: 1 month
+
+check_last: 14
+
+verbosity: 1
+syslog_verbosity: 1
+log_file_verbosity: 1
+log_file: /var/log/borgmatic/logfile.txt
+log_file_format: '[{asctime}] {levelname}: {prefix}{message}'
+
+progress: true
+statistics: true
+list_details: true
+
+default_actions: true

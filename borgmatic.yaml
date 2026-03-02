@@ -46,3 +46,6 @@ statistics: true
 list_details: true
 
 default_actions: true
+
+btrfs:
+  btrfs_command: /usr/local/btrfs

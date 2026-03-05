@@ -1,5 +1,8 @@
 source_directories:
     - /mnt/storage
+exclude_patterns:
+    - /mnt/storage/backup_photos/thumbs
+    - "*.log"
 
 repositories:
     # The local path or Borg URL of the repository.
@@ -45,4 +48,4 @@ statistics: true
 default_actions: true
 
 btrfs:
-  btrfs_command: /usr/local/btrfs
+  btrfs_command: /usr/bin/btrfs

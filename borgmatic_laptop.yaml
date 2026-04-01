@@ -1,0 +1,49 @@
+source_directories:
+    - /Users/jansenfuller
+    - "/Users/jansenfuller/Library/Application Support/librewolf"
+exclude_patterns:
+    - /Users/jansenfuller/Library
+
+repositories:
+    # The local path or Borg URL of the repository.
+  - path: ssh://root@100.107.86.11/mnt/storage2/laptop_backup.borg
+    label: laptopbackup
+    encryption: none
+    append_only: false
+
+exclude_caches: true
+checkpoint_interval: 900
+
+retries: 5
+retry_wait: 30
+
+relocated_repo_access_is_ok: true
+unknown_unencrypted_repo_access_is_ok: true
+
+keep_daily: 7
+keep_weekly: 4
+keep_monthly: 6
+
+# List of one or more consistency checks to run on a periodic basis
+# (if "frequency" is set) or every time borgmatic runs checks (if
+# "frequency" is omitted).
+checks:
+    - name: repository
+      frequency: 1 day
+    - name: data
+      frequency: 1 week
+    - name: extract
+      frequency: 1 month
+
+check_last: 14
+
+verbosity: 1
+syslog_verbosity: 1
+log_file_verbosity: 1
+log_file: .local/borgmatic_logfile.txt
+log_file_format: '[{asctime}] {levelname}: {prefix}{message}'
+
+progress: true
+statistics: true
+
+default_actions: true

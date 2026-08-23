@@ -34,6 +34,10 @@ caching:
     - /.*\.lan$/
     - /.*\.local$/
     - /.*\.host\.com\.(jp|fr)$/
+queryLog:
+  type: sqlite
+  target: /app/usb
+  logRetentionDays: 30
 prometheus:
   enable: true
 http3:

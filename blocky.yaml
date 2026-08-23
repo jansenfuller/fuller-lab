@@ -36,7 +36,7 @@ caching:
     - /.*\.host\.com\.(jp|fr)$/
 queryLog:
   type: sqlite
-  target: /app/usb
+  target: /app/usb/log.db
   logRetentionDays: 30
 prometheus:
   enable: true

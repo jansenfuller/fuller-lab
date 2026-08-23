@@ -20,7 +20,7 @@ blocking:
       - ads
 ports:
   dns: 5353
-  tls: 10853
+  tls: 20853
   https: 443
   http: 4000
 customDNS:

@@ -2,7 +2,7 @@ upstreams:
   strategy: parallel_best
   groups:
     default: 
-      - tcp-tsl:9.9.9.10
+      - tcp-tls:9.9.9.10
       - tcp-tls:149.112.112.10
       - tcp-tls:2620:fe::10
       - tcp-tls:2620:fe::fe:10

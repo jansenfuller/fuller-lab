@@ -2,13 +2,13 @@ upstreams:
   strategy: parallel_best
   groups:
     default: 
-      - 9.9.9.10
-      - 149.112.112.10
-      - 2620:fe::10
-      - 2620:fe::fe:10
-      - 194.242.2.2
-      - 193.19.108.2
-      - 2a07:e340::2
+      - tcp-tsl:9.9.9.10
+      - tcp-tls:149.112.112.10
+      - tcp-tls:2620:fe::10
+      - tcp-tls:2620:fe::fe:10
+      - tcp-tls:194.242.2.2
+      - tcp-tls:193.19.108.2
+      - tcp-tls:2a07:e340::2
       - tcp-tls:fdns1.dismail.de:853
       - https://dns.digitale-gesellschaft.ch/dns-query
 blocking:

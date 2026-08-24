@@ -13,7 +13,7 @@ upstreams:
       - https://dns.digitale-gesellschaft.ch/dns-query
 blocking:
   loading:
-    refreshPeriod: 1h
+    refreshPeriod: 24h
   denylists:
     ads: 
       - https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts

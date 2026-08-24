@@ -2,8 +2,8 @@ upstreams:
   strategy: parallel_best
   groups:
     default: 
-      - 9.9.9.9
-      - 149.112.112.112
+      - 9.9.9.10
+      - 149.112.112.10
       - 194.242.2.2
       - 194.242.2.3
       - tcp-tls:fdns1.dismail.de:853

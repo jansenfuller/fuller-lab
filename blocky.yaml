@@ -49,5 +49,5 @@ prometheus:
 http3:
   enable: true
 dnssec:
-  validate: true
+  validate: false
   clockSkewToleranceSec: 7200

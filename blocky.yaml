@@ -13,12 +13,11 @@ blocking:
   loading:
     refreshPeriod: 24h
   denylists:
-    hagezi:
+    default:
       # https://github.com/hagezi/dns-blocklists
       - https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.txt
       - https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/tif.txt
       - https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/fake.txt
-    other:
       # https://firebog.net/
       - https://v.firebog.net/hosts/Easyprivacy.txt
       # Windows
@@ -29,8 +28,7 @@ blocking:
       - https://big.oisd.nl/domainswild
   clientGroupsBlock:
     default:
-      - hagezi
-      - other
+      - default
 ports:
   dns: 5353
   tls: 20853

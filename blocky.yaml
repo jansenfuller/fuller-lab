@@ -9,6 +9,7 @@ upstreams:
       - https://fdns2.dismail.de/dns-query
       - https://dns.digitale-gesellschaft.ch/dns-query
       - https://wikimedia-dns.org/dns-query
+      - quic://dns.dnsguard.pub
 blocking:
   loading:
     refreshPeriod: 24h

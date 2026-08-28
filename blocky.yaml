@@ -14,7 +14,7 @@ blocking:
   loading:
     refreshPeriod: 24h
   denylists:
-    default:
+    ads:
       # https://github.com/hagezi/dns-blocklists
       - https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/pro.txt
       - https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/wildcard/tif.txt
@@ -29,7 +29,7 @@ blocking:
       - https://big.oisd.nl/domainswild
   clientGroupsBlock:
     default:
-      - default
+      - ads
 ports:
   dns: 5353
   tls: 20853

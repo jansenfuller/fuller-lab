@@ -43,10 +43,11 @@ customDNS:
     svr.ff.home: 10.12.30.2
 caching:
   minTime: 5m
-  maxTime: 30m
+  maxTime: 2h
   prefetching: true
   exclude:
     - /.*\.lan$/
+    - /.*\.home$/
     - /.*\.local$/
     - /.*\.host\.com\.(jp|fr)$/
 queryLog:

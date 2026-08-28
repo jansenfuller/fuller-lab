@@ -2,14 +2,11 @@ upstreams:
   strategy: parallel_best
   groups:
     default: 
-      - tcp-tls:9.9.9.10
-      - tcp-tls:149.112.112.10
-      - tcp-tls:2620:fe::10
-      - tcp-tls:2620:fe::fe:10
-      - tcp-tls:194.242.2.2
-      - tcp-tls:193.19.108.2
-      - tcp-tls:2a07:e340::2
-      - tcp-tls:fdns1.dismail.de:853
+      - https://dns.quad9.net/dns-query
+      - https://dns11.quad9.net/dns-query
+      - https://family.dns.mullvad.net/dns-query
+      - https://fdns1.dismail.de/dns-query
+      - https://fdns2.dismail.de/dns-query
       - https://dns.digitale-gesellschaft.ch/dns-query
 blocking:
   loading:

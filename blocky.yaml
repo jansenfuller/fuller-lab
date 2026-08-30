@@ -13,6 +13,9 @@ upstreams:
 blocking:
   loading:
     refreshPeriod: 24h
+  allowlists:
+    ads:
+      - https://raw.githubusercontent.com/hagezi/dns-blocklists/main/wildcard/whitelist-referral-onlydomains.txt
   denylists:
     ads:
       # https://github.com/hagezi/dns-blocklists

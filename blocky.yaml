@@ -2,14 +2,7 @@ upstreams:
   strategy: parallel_best
   groups:
     default: 
-      - https://dns.quad9.net/dns-query
-      - https://dns11.quad9.net/dns-query
-      - https://family.dns.mullvad.net/dns-query
-      - https://fdns1.dismail.de/dns-query
-      - https://fdns2.dismail.de/dns-query
-      - https://dns.digitale-gesellschaft.ch/dns-query
-      - https://wikimedia-dns.org/dns-query
-      - quic://dns.dnsguard.pub
+      - 172.17.0.3:5354
 blocking:
   loading:
     refreshPeriod: 24h
